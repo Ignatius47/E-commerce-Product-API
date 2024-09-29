@@ -6,7 +6,10 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib.auth import get_user_model
-from .serializers import CustomUserSerializer  # Updated to use the correct serializer
+from .serializers import CustomUserSerializer
+from rest_framework.decorators import api_view
+from rest_framework.reverse import reverse
+from .serializers import UserProfileSerializer
 
 User = get_user_model()  # Ensure this retrieves your CustomUser model
 
@@ -58,4 +61,39 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_object(self):
+        return self.request.user
+
+
+@api_view(['GET'])
+def api_root(request, format=None):
+    """
+    Root API endpoint that lists all available API endpoints in the e-commerce API.
+    """
+    return Response({
+        'products': {
+            'list': reverse('product-list', request=request, format=format),
+            'create': reverse('product-list', request=request, format=format),
+            'detail': reverse('product-detail', args=[1], request=request, format=format),
+        },
+        'users': {
+            'register': reverse('user-register', request=request, format=format),
+            'login': reverse('token_obtain_pair', request=request, format=format),  # Login URL
+            'profile': reverse('user-profile', request=request, format=format),
+        },
+        'auth': {
+            'token_refresh': reverse('token_refresh', request=request, format=format),  # Token refresh URL
+        }
+    })
+
+class UserProfileView(generics.RetrieveAPIView):
+    """
+    API view to retrieve the currently logged-in user's profile.
+    """
+    serializer_class = UserProfileSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        """
+        Override get_object to return the profile of the authenticated user.
+        """
         return self.request.user
