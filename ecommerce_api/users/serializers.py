@@ -27,12 +27,3 @@ class CustomUserSerializer(serializers.ModelSerializer):
         if CustomUser.objects.filter(username=value).exists():
             raise serializers.ValidationError("A user with this username already exists.")
         return value
-
-
-class UserProfileSerializer(serializers.ModelSerializer):
-    """
-    Serializer for user profile details.
-    """
-    class Meta:
-        model = User
-        fields = ['id', 'username', 'email']
