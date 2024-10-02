@@ -1,4 +1,4 @@
-E-commerce Product API:
+#E-commerce Product API
 
 Overview
 This API is designed to manage core e-commerce functionalities such as product management, user authentication, and product search/filter capabilities. Built using Django and Django REST Framework (DRF), it supports full CRUD (Create, Read, Update, Delete) operations and includes role-based access control for secure resource handling.
@@ -32,13 +32,14 @@ git clone https://github.com/Ignatius47/E-commerce-Product-API.git
 cd ecommerce-api
 
 2. Create and Activate a Virtual Environment
-# Unix-based systems
+Unix-based systems:
 python3 -m venv env
 source env/bin/activate
 
-# Windows
+Windows:
 python -m venv env
 env\Scripts\activate
+
 3. Install Dependencies
 pip install -r requirements.txt
 
