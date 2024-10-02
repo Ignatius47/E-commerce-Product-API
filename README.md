@@ -1,4 +1,4 @@
-#E-commerce Product API
+# E-commerce Product API
 
 Overview
 This API is designed to manage core e-commerce functionalities such as product management, user authentication, and product search/filter capabilities. Built using Django and Django REST Framework (DRF), it supports full CRUD (Create, Read, Update, Delete) operations and includes role-based access control for secure resource handling.
